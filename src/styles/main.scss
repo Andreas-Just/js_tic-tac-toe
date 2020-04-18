@@ -3,5 +3,101 @@
 @import "typography";
 
 body {
-  background: $c-gray;
+  background: $d-green;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-width: 1000px;
+  min-width: 500px;
+  width: 100%;
+  margin: 80px auto;
+  background-color: $l-green;
+  border-radius: 20px;
+
+  &__play-field {
+    margin: 30px auto;
+    border-collapse: collapse;
+  }
+
+  &__cell {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    vertical-align: middle;
+    font-style: italic;
+    font-family: $fontCS;
+    font-size: 70px;
+    border: 5px solid $d-green;
+    cursor: pointer;
+  }
+
+  &__cell:first-child {
+    border-left: none;
+  }
+
+  &__cell:last-child {
+    border-right: none;
+  }
+
+  &__row:first-child &__cell {
+    border-top: none;
+  }
+
+  &__row:last-child &__cell {
+    border-bottom: none;
+  }
+
+  &__message {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    display: none;
+    width: 200px;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 2em;
+    color: white;
+    background-color: $bg-msg;
+    border-radius: 5px;
+    transform: translate(-50%, -20%);
+  }
+
+  &__btn {
+    width: 100%;
+    height: 80px;
+    padding: 0;
+    font-family: $fontCS;
+    font-style: italic;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 1;
+    letter-spacing: 2px;
+    word-spacing: 10px;
+    text-transform: uppercase;
+    color: $c-btn-opf;
+    background-color: $bg-btn;
+    border: none;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    transition: all 500ms;
+  }
+
+  &__btn:focus {
+    outline: none;
+  }
+
+  &__btn:hover {
+    color: $c-btn;
+    background-color: $shadow;
+    box-shadow: 0 3px 12px $shadow;
+  }
+
+  &__btn:active {
+    color: $c-btn-opf;
+    background-color: $shadow;
+    box-shadow: inset 0 3px 12px -3px rgba($d-green, 0.8);
+  }
 }
