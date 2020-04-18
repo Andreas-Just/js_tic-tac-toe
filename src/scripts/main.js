@@ -1,7 +1,7 @@
 'use strict';
 
 let origBoard;
-let huPlayer = 'X';
+let huPlayer;
 const aiPlayer = 'O';
 const winCombos = [
   [0, 1, 2],
@@ -19,15 +19,23 @@ const cells = container.querySelectorAll('.container__cell');
 const endgame = container.querySelector('.container__message');
 const startBtn = container.querySelector('.container__btn--bottom');
 const chooseGameTypeBtn = container.querySelector('.container__inner');
-const flag = true;
+let flag;
 
 startBtn.addEventListener('click', startGame);
 
 function startGame() {
-  endgame.style.display = 'none';
+  huPlayer = 'X';
   startBtn.textContent = 'restart';
   startBtn.setAttribute('disabled', 'true');
   chooseGameTypeBtn.addEventListener('click', chooseGameType);
+  displayMessage('Choose the type of game: one or two players.');
+  origBoard = [...Array(9).keys()];
+
+  cells.forEach((_, index) => {
+    cells[index].innerText = '';
+    cells[index].style = '';
+    cells[index].removeEventListener('click', turnClick);
+  });
 
   [...chooseGameTypeBtn.children].forEach(btn => {
     btn.style = '';
@@ -36,26 +44,13 @@ function startGame() {
 }
 
 const chooseGameType = (click) => {
-  const onePlayer = click.target.closest('.container__btn--left');
-  const twoPlayers = click.target.closest('.container__btn--right');
-
-  if (onePlayer) {
-    onePlayer.setAttribute('disabled', 'true');
-    onePlayer.nextElementSibling.style.display = 'none';
-    onePlayer.style.borderTopRightRadius = '20px';
-  } else {
-    twoPlayers.setAttribute('disabled', 'true');
-    twoPlayers.previousElementSibling.style.display = 'none';
-    twoPlayers.style.borderTopLeftRadius = '20px';
-  }
-  // console.log(onePlayer.nextElementSibling);
+  choosePlayer(click);
+  endgame.style.display = 'none';
   startBtn.removeAttribute('disabled');
-  origBoard = [...Array(9).keys()];
 
-  cells.forEach((item, index) => {
-    cells[index].innerText = '';
-    cells[index].style.removeProperty('color');
+  cells.forEach((_, index) => {
     cells[index].addEventListener('click', turnClick);
+    cells[index].style.cursor = 'url("../images/pencil.cur"), pointer';
   });
 };
 
@@ -67,7 +62,7 @@ const turnClick = cell => {
       if (flag) {
         turn(bestSpot(), aiPlayer);
       } else {
-        huPlayer = huPlayer === 'X' ? 'O' : 'X';
+        huPlayer = huPlayer === 'O' ? 'X' : 'O';
       }
     }
   }
@@ -103,19 +98,62 @@ const checkWin = (board, player) => {
   return gameWon;
 };
 
+const checkTie = () => {
+  if (emptySquares().length === 0) {
+    if (endgame.style.display === 'none') {
+      cells.forEach((_, index) => {
+        cells[index].style.color = 'green';
+        cells[index].removeEventListener('click', turnClick);
+      });
+
+      displayMessage('Tie Game!');
+    } else {
+      cells.forEach((_, index) => {
+        cells[index].removeEventListener('click', turnClick);
+      });
+    }
+
+    return true;
+  }
+
+  return false;
+};
+
 const gameOver = gameWon => {
   winCombos[gameWon.index].forEach(item => {
     document.getElementById(item)
       .style.color = gameWon.player === huPlayer ? 'blue' : 'red';
   });
 
-  cells.forEach((item, index) => {
+  cells.forEach((_, index) => {
     cells[index].removeEventListener('click', turnClick);
   });
-  declareWinner(gameWon.player === huPlayer ? 'You win!' : 'You lose.');
+
+  if (flag) {
+    displayMessage(gameWon.player === huPlayer ? 'You win!' : 'You lose.');
+  } else {
+    displayMessage(`Player "${gameWon.player}" won!`);
+  }
 };
 
-const declareWinner = who => {
+const choosePlayer = (click) => {
+  const onePlayer = click.target.closest('.container__btn--left');
+  const twoPlayers = click.target.closest('.container__btn--right');
+
+  if (onePlayer) {
+    onePlayer.setAttribute('disabled', 'true');
+    onePlayer.nextElementSibling.style.display = 'none';
+    onePlayer.style.borderTopRightRadius = '20px';
+    flag = true;
+  } else {
+    twoPlayers.setAttribute('disabled', 'true');
+    twoPlayers.previousElementSibling.style.display = 'none';
+    twoPlayers.style.borderTopLeftRadius = '20px';
+    flag = false;
+  }
+};
+
+const displayMessage = who => {
   endgame.style.display = 'block';
   endgame.children[0].innerText = who;
 };
@@ -133,27 +171,6 @@ const emptySquares = () => origBoard.filter(s => typeof s === 'number');
  */
 
 const bestSpot = () => minimax(origBoard, aiPlayer).index;
-
-const checkTie = () => {
-  if (emptySquares().length === 0) {
-    if (endgame.style.display === 'none') {
-      cells.forEach((item, index) => {
-        cells[index].style.color = 'green';
-        cells[index].removeEventListener('click', turnClick);
-      });
-
-      declareWinner('Tie Game!');
-    } else {
-      cells.forEach((item, index) => {
-        cells[index].removeEventListener('click', turnClick);
-      });
-    }
-
-    return true;
-  }
-
-  return false;
-};
 
 const minimax = (newBoard, player) => {
   const availSpots = emptySquares();
