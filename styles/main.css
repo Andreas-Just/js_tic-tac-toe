@@ -1,0 +1,96 @@
+h1 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400; }
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../fonts/Roboto-Regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal; }
+
+body {
+  background: #004105; }
+
+.container {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  max-width: 1000px;
+  min-width: 500px;
+  width: 100%;
+  margin: 80px auto;
+  background-color: #d8e6d6;
+  border-radius: 20px; }
+  .container__play-field {
+    margin: 30px auto;
+    border-collapse: collapse; }
+  .container__cell {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    vertical-align: middle;
+    font-style: italic;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 70px;
+    border: 5px solid #004105;
+    cursor: pointer; }
+  .container__cell:first-child {
+    border-left: none; }
+  .container__cell:last-child {
+    border-right: none; }
+  .container__row:first-child .container__cell {
+    border-top: none; }
+  .container__row:last-child .container__cell {
+    border-bottom: none; }
+  .container__message {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    display: none;
+    width: 200px;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 2em;
+    color: white;
+    background-color: rgba(205, 133, 63, 0.8);
+    border-radius: 5px;
+    -webkit-transform: translate(-50%, -20%);
+            transform: translate(-50%, -20%); }
+  .container__btn {
+    width: 100%;
+    height: 80px;
+    padding: 0;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-style: italic;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 1;
+    letter-spacing: 2px;
+    word-spacing: 10px;
+    text-transform: uppercase;
+    color: #004105;
+    background-color: rgba(205, 133, 63, 0.8);
+    border: none;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    -webkit-transition: all 500ms;
+    transition: all 500ms; }
+  .container__btn:focus {
+    outline: none; }
+  .container__btn:hover {
+    color: rgba(0, 65, 5, 0.7);
+    background-color: #cd853f;
+    -webkit-box-shadow: 0 3px 12px #cd853f;
+            box-shadow: 0 3px 12px #cd853f; }
+  .container__btn:active {
+    color: #004105;
+    background-color: #cd853f;
+    -webkit-box-shadow: inset 0 3px 12px -3px rgba(0, 65, 5, 0.8);
+            box-shadow: inset 0 3px 12px -3px rgba(0, 65, 5, 0.8); }
+
+/*# sourceMappingURL=main.css.map */
