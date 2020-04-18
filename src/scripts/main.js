@@ -17,7 +17,8 @@ const winCombos = [
 const container = document.querySelector('.container');
 const cells = container.querySelectorAll('.container__cell');
 const endgame = container.querySelector('.container__message');
-const startBtn = container.querySelector('.container__btn');
+const startBtn = container.querySelector('.container__btn--bottom');
+const chooseGameTypeBtn = container.querySelector('.container__inner');
 const flag = true;
 
 startBtn.addEventListener('click', startGame);
@@ -25,14 +26,38 @@ startBtn.addEventListener('click', startGame);
 function startGame() {
   endgame.style.display = 'none';
   startBtn.textContent = 'restart';
+  startBtn.setAttribute('disabled', 'true');
+  chooseGameTypeBtn.addEventListener('click', chooseGameType);
+
+  [...chooseGameTypeBtn.children].forEach(btn => {
+    btn.style = '';
+    btn.removeAttribute('disabled');
+  });
+}
+
+const chooseGameType = (click) => {
+  const onePlayer = click.target.closest('.container__btn--left');
+  const twoPlayers = click.target.closest('.container__btn--right');
+
+  if (onePlayer) {
+    onePlayer.setAttribute('disabled', 'true');
+    onePlayer.nextElementSibling.style.display = 'none';
+    onePlayer.style.borderTopRightRadius = '20px';
+  } else {
+    twoPlayers.setAttribute('disabled', 'true');
+    twoPlayers.previousElementSibling.style.display = 'none';
+    twoPlayers.style.borderTopLeftRadius = '20px';
+  }
+  // console.log(onePlayer.nextElementSibling);
+  startBtn.removeAttribute('disabled');
   origBoard = [...Array(9).keys()];
 
   cells.forEach((item, index) => {
     cells[index].innerText = '';
-    cells[index].style.removeProperty('background-color');
+    cells[index].style.removeProperty('color');
     cells[index].addEventListener('click', turnClick);
   });
-}
+};
 
 const turnClick = cell => {
   if (typeof origBoard[cell.target.id] === 'number') {
@@ -81,7 +106,7 @@ const checkWin = (board, player) => {
 const gameOver = gameWon => {
   winCombos[gameWon.index].forEach(item => {
     document.getElementById(item)
-      .style.backgroundColor = gameWon.player === huPlayer ? 'blue' : 'red';
+      .style.color = gameWon.player === huPlayer ? 'blue' : 'red';
   });
 
   cells.forEach((item, index) => {
@@ -113,7 +138,7 @@ const checkTie = () => {
   if (emptySquares().length === 0) {
     if (endgame.style.display === 'none') {
       cells.forEach((item, index) => {
-        cells[index].style.backgroundColor = 'green';
+        cells[index].style.color = 'green';
         cells[index].removeEventListener('click', turnClick);
       });
 

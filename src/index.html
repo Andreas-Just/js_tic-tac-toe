@@ -9,9 +9,23 @@
   <body>
 
     <div class="container">
+      <div class="container__inner">
+        <button
+          class="container__btn container__btn--top container__btn--left"
+          disabled
+        >
+          One player
+        </button>
+        <button
+          class="container__btn container__btn--top container__btn--right"
+          disabled
+        >
+          Two players
+        </button>
+      </div>
       <table class="container__play-field">
         <tr class="container__row">
-          <td class="container__cell" id="0"></td>
+          <td class="container__cell" id="0">O</td>
           <td class="container__cell" id="1"></td>
           <td class="container__cell" id="2"></td>
         </tr>
@@ -29,7 +43,7 @@
       <div class="container__message">
         <div class="text"></div>
       </div>
-      <button class="container__btn">start</button>
+      <button class="container__btn container__btn--bottom">start</button>
     </div>
 
     <script type="text/javascript" src="scripts/main.js"></script>

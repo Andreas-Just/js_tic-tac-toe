@@ -17,9 +17,14 @@ body {
   background-color: $l-green;
   border-radius: 20px;
 
+  &__inner {
+    display: flex;
+  }
+
   &__play-field {
     margin: 30px auto;
     border-collapse: collapse;
+    transform: skew(-7deg);
   }
 
   &__cell {
@@ -29,7 +34,7 @@ body {
     vertical-align: middle;
     font-style: italic;
     font-family: $fontCS;
-    font-size: 70px;
+    font-size: 80px;
     border: 5px solid $d-green;
     cursor: pointer;
   }
@@ -52,7 +57,7 @@ body {
 
   &__message {
     position: absolute;
-    top: 40%;
+    top: 50%;
     left: 50%;
     display: none;
     width: 200px;
@@ -62,7 +67,7 @@ body {
     color: white;
     background-color: $bg-msg;
     border-radius: 5px;
-    transform: translate(-50%, -20%);
+    transform: translate(-50%, -50%);
   }
 
   &__btn {
@@ -71,7 +76,7 @@ body {
     padding: 0;
     font-family: $fontCS;
     font-style: italic;
-    font-size: 30px;
+    font-size: 35px;
     font-weight: bold;
     line-height: 1;
     letter-spacing: 2px;
@@ -80,9 +85,23 @@ body {
     color: $c-btn-opf;
     background-color: $bg-btn;
     border: none;
+    transition-duration: 300ms;
+    transition-property: background-color, box-shadow;
+  }
+
+  &__btn--top {
+    font-size: 23px;
+  }
+  &__btn--left {
+    border-top-left-radius: 20px;
+  }
+  &__btn--right {
+    border-top-right-radius: 20px;
+  }
+
+  &__btn--bottom {
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
-    transition: all 500ms;
   }
 
   &__btn:focus {
@@ -92,12 +111,35 @@ body {
   &__btn:hover {
     color: $c-btn;
     background-color: $shadow;
+  }
+  &__btn--bottom:hover {
     box-shadow: 0 3px 12px $shadow;
+  }
+  &__btn--top:hover {
+    box-shadow: 0 -3px 12px $shadow;
   }
 
   &__btn:active {
     color: $c-btn-opf;
     background-color: $shadow;
-    box-shadow: inset 0 3px 12px -3px rgba($d-green, 0.8);
+  }
+  &__btn--left:active {
+    box-shadow: inset -2px -3px 12px -3px rgba($d-green, 0.75);
+  }
+  &__btn--right:active {
+    box-shadow: inset 2px -3px 12px -3px rgba($d-green, 0.75);
+  }
+  &__btn--bottom:active {
+    box-shadow: inset 0 3px 12px -3px rgba($d-green, 0.75);
+  }
+
+  &__btn--top:disabled,
+  &__btn--bottom:disabled {
+    color: $c-btn;
+    background-color: $shadow;
+    box-shadow: inset 0 -3px 12px -3px rgba($d-green, 0.75);
+  }
+  &__btn--bottom:disabled {
+    box-shadow: inset 0 3px 12px -3px rgba($d-green, 0.75);
   }
 }
