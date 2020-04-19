@@ -2,12 +2,52 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="images/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Title</title>
+    <link rel="apple-touch-icon" href="images/logo256.png" />
+    <title>Tic Tac Toe</title>
     <link rel="stylesheet" href="./styles/main.css">
   </head>
   <body>
-    <h1>Hello Mate Academy</h1>
+
+    <div class="container">
+      <div class="container__inner">
+        <button
+          class="container__btn container__btn--top container__btn--left"
+          disabled
+        >
+          One player
+        </button>
+        <button
+          class="container__btn container__btn--top container__btn--right"
+          disabled
+        >
+          Two players
+        </button>
+      </div>
+      <table class="container__play-field">
+        <tr class="container__row">
+          <td class="container__cell" id="0">O</td>
+          <td class="container__cell" id="1"></td>
+          <td class="container__cell" id="2"></td>
+        </tr>
+        <tr class="container__row">
+          <td class="container__cell" id="3">X</td>
+          <td class="container__cell" id="4">O</td>
+          <td class="container__cell" id="5"></td>
+        </tr>
+        <tr class="container__row">
+          <td class="container__cell" id="6"></td>
+          <td class="container__cell" id="7"></td>
+          <td class="container__cell" id="8"></td>
+        </tr>
+      </table>
+      <div class="container__message">
+        <div class="text"></div>
+      </div>
+      <button class="container__btn container__btn--bottom">start</button>
+    </div>
+
     <script type="text/javascript" src="scripts/main.js"></script>
   </body>
 </html>
