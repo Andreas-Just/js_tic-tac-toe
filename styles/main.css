@@ -15,6 +15,19 @@ h1 {
   font-style: normal; }
 
 body {
+  margin: 0;
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  height: 100vh;
   background: #004105; }
 
 .container {
@@ -27,9 +40,8 @@ body {
       -ms-flex-direction: column;
           flex-direction: column;
   max-width: 1000px;
-  min-width: 500px;
+  min-width: 320px;
   width: 100%;
-  margin: 80px auto;
   background-color: #d8e6d6;
   border-radius: 20px; }
   .container__inner {
@@ -42,14 +54,15 @@ body {
     -webkit-transform: skew(-7deg);
             transform: skew(-7deg); }
   .container__cell {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     text-align: center;
-    vertical-align: middle;
+    vertical-align: bottom;
     font-style: italic;
     font-family: "PWChalk", cursive, sans-serif;
-    font-size: 80px;
-    border: 5px solid #004105;
+    font-size: 90px;
+    line-height: 105px;
+    border: 6px groove rgba(0, 65, 5, 0.6);
     cursor: no-drop; }
   .container__cell:first-child {
     border-left: none; }
@@ -75,14 +88,14 @@ body {
             transform: translate(-50%, -50%); }
   .container__btn {
     width: 100%;
-    height: 80px;
+    height: 100px;
     padding: 0;
     font-family: "PWChalk", cursive, sans-serif;
     font-style: italic;
-    font-size: 35px;
+    font-size: 40px;
     font-weight: bold;
     line-height: 1;
-    letter-spacing: 2px;
+    letter-spacing: 7px;
     word-spacing: 10px;
     text-transform: uppercase;
     color: #004105;
@@ -96,7 +109,8 @@ body {
     transition-property: background-color, box-shadow, -webkit-box-shadow;
     cursor: pointer; }
   .container__btn--top {
-    font-size: 23px; }
+    font-size: 23px;
+    letter-spacing: 1.5px; }
   .container__btn--left {
     border-top-left-radius: 20px; }
   .container__btn--right {
@@ -136,5 +150,22 @@ body {
   .container__btn--bottom:disabled {
     -webkit-box-shadow: inset 0 3px 12px -3px rgba(0, 65, 5, 0.75);
             box-shadow: inset 0 3px 12px -3px rgba(0, 65, 5, 0.75); }
+
+@media (max-width: 1600px) {
+  .container {
+    max-width: 800px; }
+    .container__play-field {
+      margin: 10px auto; }
+    .container__cell {
+      width: 80px;
+      height: 80px;
+      font-size: 70px;
+      line-height: 70px;
+      border-width: 5px; }
+    .container__btn {
+      height: 80px;
+      font-size: 16px; }
+    .container__btn--bottom {
+      font-size: 30px; } }
 
 /*# sourceMappingURL=main.css.map */
